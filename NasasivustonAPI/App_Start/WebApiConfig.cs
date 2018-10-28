@@ -9,10 +9,18 @@ namespace NasasivustonAPI
     {
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors();
+
             // Web API configuration and services
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "EtsiNimelläApi",
+                routeTemplate: "api/{controller}/{username}",
+                defaults: new { username = RouteParameter.Optional }
+               );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
